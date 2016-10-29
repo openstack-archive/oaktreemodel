@@ -1,0 +1,82 @@
+// Copyright (c) 2016 Red Hat, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "common.proto";
+
+package oaktree;
+
+message DiskFormat {
+  enum DiskFormatChoice {
+    qcow2 = 0;
+    raw = 1;
+    vhd = 2;
+    iso = 3;
+    vmdk = 4;
+    vdi = 5;
+    ami = 6;
+    ari = 7;
+    aki = 8;
+  };
+};
+
+message ContainerFormat {
+  enum ContainerFormatChoice {
+    bare = 0;
+    docker = 1;
+    ovf = 2;
+    ova = 3;
+    ami = 4;
+    ari = 5;
+    aki = 6;
+  };
+};
+
+message Image {
+  Location location = 1;
+  string id = 2;
+  string name = 3;
+  uint32 min_ram = 4;
+  uint64 min_disk = 5;
+  uint64 size = 6;
+  uint64 virtual_size = 7;
+  ContainerFormat.ContainerFormatChoice container_format = 8;
+  DiskFormat.DiskFormatChoice disk_format = 9;
+  string checksum = 10;
+  string created_at = 11;
+  string updated_at = 12;
+  string owner = 13;
+  bool is_public = 14;
+  bool is_protected = 15;
+  enum Status {
+    active = 0;
+    queued = 1;
+    saving = 2;
+    deleted = 3;
+    killed = 4;
+    pending_delete = 5;
+    deactivated = 6;
+  }
+  Status status = 16;
+  repeated string locations = 17;
+  string direct_url = 18;
+  repeated string tags = 19;
+  map<string, string> properties = 99;
+}
+
+message ImageList {
+  repeated Image images = 1;
+}

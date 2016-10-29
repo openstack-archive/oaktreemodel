@@ -1,0 +1,39 @@
+// Copyright (c) Red Hat, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.openstack.infra.oaktree";
+option java_outer_classname = "OaktreeProto";
+option objc_class_prefix = "OAK";
+
+import "common.proto";
+import "flavor.proto";
+import "image.proto";
+import "security_group.proto";
+
+package oaktree;
+
+service Oaktree {
+  rpc GetFlavor (Filter) returns (Flavor) {}
+  rpc SearchFlavors (Filter) returns (FlavorList) {}
+  rpc GetImage (Filter) returns (Image) {}
+  rpc SearchImages (Filter) returns (ImageList) {}
+  rpc GetSecurityGroup (Filter) returns (SecurityGroup) {}
+  rpc SearchSecurityGroups (Filter) returns (SecurityGroupList) {}
+  rpc GetSecurityGroupRule (Filter) returns (SecurityGroupRule) {}
+  rpc SearchSecurityGroupRules (Filter) returns (SecurityGroupRuleList) {}
+}

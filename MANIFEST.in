@@ -1,0 +1,8 @@
+include AUTHORS
+include ChangeLog
+include oaktreemodel/*pb2.py
+exclude .gitignore
+exclude .gitreview
+
+global-exclude *.pyc
+global-exclude *.go

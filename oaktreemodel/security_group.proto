@@ -1,0 +1,55 @@
+// Copyright (c) 2016 Red Hat, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "common.proto";
+
+package oaktree;
+
+message SecurityGroupRule {
+  enum Direction {
+    ingress = 0;
+    egress = 1;
+  }
+  Location location = 1;
+  string id = 2;
+  Direction direction = 3;
+  string ethertype = 4;
+  uint32 port_range_min = 5;
+  uint32 port_range_max = 6;
+  string protocol = 7;
+  string remote_ip_prefix = 8;
+  string security_group_id = 9;
+  string remote_group_id = 10;
+  map<string, string> properties = 99;
+}
+
+message SecurityGroupRuleList {
+  repeated SecurityGroupRule rules = 1;
+}
+
+message SecurityGroup {
+  Location location = 1;
+  string id = 2;
+  string name = 3;
+  string description = 4;
+  repeated SecurityGroupRule rules = 5;
+  map<string, string> properties = 99;
+}
+
+message SecurityGroupList {
+  repeated SecurityGroup security_groups = 1;
+}

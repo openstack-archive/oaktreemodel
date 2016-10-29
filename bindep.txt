@@ -1,0 +1,7 @@
+libprotobuf-dev
+protobuf-compiler
+pkg-config
+build-essential
+autoconf
+libtool
+golang-go
