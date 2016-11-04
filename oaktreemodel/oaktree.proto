@@ -22,6 +22,7 @@ option objc_class_prefix = "OAK";
 
 import "common.proto";
 import "flavor.proto";
+import "floating_ip.proto";
 import "image.proto";
 import "security_group.proto";
 
@@ -30,6 +31,8 @@ package oaktree;
 service Oaktree {
   rpc GetFlavor (Filter) returns (Flavor) {}
   rpc SearchFlavors (Filter) returns (FlavorList) {}
+  rpc GetFloatingIP (Filter) returns (FloatingIP) {}
+  rpc SearchFloatingIPs (Filter) returns (FloatingIPList) {}
   rpc GetImage (Filter) returns (Image) {}
   rpc SearchImages (Filter) returns (ImageList) {}
   rpc GetSecurityGroup (Filter) returns (SecurityGroup) {}
