@@ -26,7 +26,6 @@ DIST_SUBDIRS = ${SUBDIRS}
 BUILT_SOURCES=
 BUILT_MAINT_SRC=
 EXTRA_DIST= \
-	    ChangeLog \
 	    config/pandora_vc_revinfo \
 	    ${top_srcdir}/m4/*m4
 
@@ -35,7 +34,6 @@ DISTCLEANFILES=		config/top.h
 
 MAINTAINERCLEANFILES=
 MAINTAINERCLEANFILES+= autom4te.cache
-MAINTAINERCLEANFILES+= ChangeLog
 
 maintainer-clean-local:
 	find . -type f -name '*~' -exec rm -f '{}' \;
@@ -114,7 +112,7 @@ EXTRA_DIST += \
 	oaktreemodel/security_group.proto \
 	oaktreemodel/oaktree.proto
 
-SUFFIXES += .proto .grpc.pb.cc .pb.cc .pb.h py .pb.go
+SUFFIXES += .proto .grpc.pb.cc .grpc.pb.h .pb.cc .pb.h py .pb.go
 PROTOS_PATH=${top_srcdir}/oaktreemodel
 PROTO_OUTPUT=${top_builddir}/oaktreemodel
 .proto.grpc.pb.cc:

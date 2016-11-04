@@ -14,4 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+if ! protoc --version | grep -q 3\. ; then
+    echo "Protobuf v3 required - installing"
+    bash install_proto3.sh
+fi
+pip install pbr
+
 autoreconf -fi
