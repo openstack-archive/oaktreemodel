@@ -114,7 +114,7 @@ EXTRA_DIST += \
 	oaktreemodel/security_group.proto \
 	oaktreemodel/oaktree.proto
 
-SUFFIXES += .proto .grpc.pb.cc .pb.cc .pb.h py .pb.go
+SUFFIXES += .proto .grpc.pb.cc .grpc.pb.h .pb.cc .pb.h py .pb.go
 PROTOS_PATH=${top_srcdir}/oaktreemodel
 PROTO_OUTPUT=${top_builddir}/oaktreemodel
 .proto.grpc.pb.cc:

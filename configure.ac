@@ -111,6 +111,8 @@ AS_IF([test "$lt_cv_prog_gnu_ld" = "yes"],[
   LDFLAGS="${LDFLAGS} ${LD_VERSION_SCRIPT}"
   ])
 
+AM_CXXFLAGS="-std=c++11 $AM_CXXFLAGS"
+
 AC_CONFIG_FILES([Makefile])
 
 AC_OUTPUT
