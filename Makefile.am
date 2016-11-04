@@ -63,6 +63,7 @@ liboaktreemodel_la_CXXFLAGS = ${AM_CXXFLAGS} ${PROTOSKIP_WARNINGS} ${NO_WERROR}
 liboaktreemodel_la_SOURCES = \
 	oaktreemodel/common.pb.cc \
 	oaktreemodel/flavor.pb.cc \
+	oaktreemodel/floating_ip.pb.cc \
 	oaktreemodel/image.pb.cc \
 	oaktreemodel/security_group.pb.cc \
 	oaktreemodel/oaktree.pb.cc \
@@ -71,6 +72,7 @@ liboaktreemodel_la_SOURCES = \
 pkginclude_HEADERS = \
 	oaktreemodel/common.pb.h \
 	oaktreemodel/flavor.pb.h \
+	oaktreemodel/floating_ip.pb.h \
 	oaktreemodel/image.pb.h \
 	oaktreemodel/security_group.pb.h \
 	oaktreemodel/oaktree.pb.h \
@@ -84,6 +86,9 @@ BUILT_SOURCES += \
 	oaktreemodel/flavor.pb.cc \
 	oaktreemodel/flavor.pb.h \
 	oaktreemodel/flavor_pb2.py \
+	oaktreemodel/floating_ip.pb.cc \
+	oaktreemodel/floating_ip.pb.h \
+	oaktreemodel/floating_ip_pb2.py \
 	oaktreemodel/image.pb.cc \
 	oaktreemodel/image.pb.h \
 	oaktreemodel/image_pb2.py \
@@ -100,6 +105,7 @@ if HAVE_GO_PLUGIN
 BUILT_SOURCES += \
 	oaktreemodel/common.pb.go \
 	oaktreemodel/flavor.pb.go \
+	oaktreemodel/floating_ip.pb.go \
 	oaktreemodel/image.pb.go \
 	oaktreemodel/oaktree.pb.go \
 	oaktreemodel/security_group.pb.go
@@ -108,6 +114,7 @@ endif
 EXTRA_DIST += \
 	oaktreemodel/common.proto \
 	oaktreemodel/flavor.proto \
+	oaktreemodel/floating_ip.proto \
 	oaktreemodel/image.proto \
 	oaktreemodel/security_group.proto \
 	oaktreemodel/oaktree.proto
