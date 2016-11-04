@@ -14,10 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if ! protoc --version | grep -q 3\. ; then
-    echo "Protobuf v3 required - installing"
-    bash install_proto3.sh
+if [ -z $GOPATH ]; then
+    echo "oaktreemodel requires a golang environment."
+    echo "Please set GOPATH and make sure GOPATH/bin is in your PATH."
+    exit 1
 fi
-pip install pbr
+GRPCDIR=$GOPATH/src/github.com/grpc/grpc
+GRPCVER=$(curl -L http://grpc.io/release)
+mkdir -p $(dirname $GRPCDIR)
+git clone -b $GRPCVER https://github.com/grpc/grpc $GRPCDIR
+cd $GRPCDIR
 
-autoreconf -fi
+git submodule update --init
+make
+if [ $(id -u) = '0' ] ; then
+    SUDO=
+else
+    SUDO=sudo
+fi
+$SUDO make install
+cd third_party/protobuf
+$SUDO make install
+
+go get google.golang.org/grpc
+go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
