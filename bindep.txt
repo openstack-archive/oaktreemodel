@@ -2,6 +2,7 @@ libprotobuf-dev
 protobuf-compiler
 pkg-config
 build-essential
+aclocal
 autoconf
 libtool
 golang-go
