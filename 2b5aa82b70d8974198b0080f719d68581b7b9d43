@@ -1,0 +1,9 @@
+Verified-1: Jenkins
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Monty Taylor <mordred@inaugust.com>
+Submitted-by: Monty Taylor <mordred@inaugust.com>
+Submitted-at: Sun, 06 Nov 2016 14:09:08 +0000
+Reviewed-on: https://review.openstack.org/393742
+Project: openstack/oaktreemodel
+Branch: refs/heads/master
