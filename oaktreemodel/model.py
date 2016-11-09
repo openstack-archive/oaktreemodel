@@ -16,6 +16,7 @@
 
 from oaktreemodel.common_pb2 import Project, Location, Filter
 from oaktreemodel.flavor_pb2 import Flavor, FlavorList
+from oaktreemodel.floating_ip_pb2 import FloatingIP, FloatingIPList
 from oaktreemodel.image_pb2 import Image, ImageList
 from oaktreemodel.security_group_pb2 import SecurityGroup, SecurityGroupList
 from oaktreemodel.security_group_pb2 import SecurityGroupRule
