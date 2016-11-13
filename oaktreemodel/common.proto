@@ -39,5 +39,6 @@ message Filter {
   Location location = 1;
   string name_or_id = 2;
   string jmespath = 3;
+  map<string, string> filter = 4;
 }
 
