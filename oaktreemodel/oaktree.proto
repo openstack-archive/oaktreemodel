@@ -30,13 +30,13 @@ package oaktree;
 
 service Oaktree {
   rpc GetFlavor (Filter) returns (Flavor) {}
-  rpc SearchFlavors (Filter) returns (FlavorList) {}
+  rpc ListFlavors (Filter) returns (FlavorList) {}
   rpc GetFloatingIP (Filter) returns (FloatingIP) {}
-  rpc SearchFloatingIPs (Filter) returns (FloatingIPList) {}
+  rpc ListFloatingIPs (Filter) returns (FloatingIPList) {}
   rpc GetImage (Filter) returns (Image) {}
-  rpc SearchImages (Filter) returns (ImageList) {}
+  rpc ListImages (Filter) returns (ImageList) {}
   rpc GetSecurityGroup (Filter) returns (SecurityGroup) {}
-  rpc SearchSecurityGroups (Filter) returns (SecurityGroupList) {}
+  rpc ListSecurityGroups (Filter) returns (SecurityGroupList) {}
   rpc GetSecurityGroupRule (Filter) returns (SecurityGroupRule) {}
-  rpc SearchSecurityGroupRules (Filter) returns (SecurityGroupRuleList) {}
+  rpc ListSecurityGroupRules (Filter) returns (SecurityGroupRuleList) {}
 }
