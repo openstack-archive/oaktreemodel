@@ -1,4 +1,5 @@
 *.py[cod]
+liboaktreemodel*.tar.gz
 
 # C extensions
 *.so
