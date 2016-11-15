@@ -1,0 +1,63 @@
+// Copyright (c) 2016 Mirantis, Inc
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "common.proto";
+
+package oaktree;
+
+message Network {
+    string id = 1;
+    string status = 2;
+    string name = 3;
+    bool admin_state_up = 4;
+    string project_id = 5;
+    string tenant_id = 6;
+    string updated_at = 7;
+    string changed_at = 8;
+    uint32 mtu = 9;
+    repeated Subnets subnets = 10;
+    bool shared = 11;
+}
+
+
+message Subnet {
+    string name
+    bool enable_dhcp
+    string network_id
+    string project_id
+    string tenant_id 
+    repeated string dns_nameservers
+    repeated AllocationPool allocation_pools
+    repeated HostRoute host_routes
+    enum IpVersion {
+        ipv4 = 4
+        ipv6 = 6
+    }
+    IpVersion ip_version
+    string cidr
+    string gateway_ip
+}
+
+message HostRoute {
+    string destination = 1;
+    string nexthop = 2;
+}
+
+message AllocationPool {
+    string start = 1;
+    string end = 2;
+}
