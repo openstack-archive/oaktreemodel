@@ -21,3 +21,4 @@ from oaktreemodel.image_pb2 import Image, ImageList
 from oaktreemodel.security_group_pb2 import SecurityGroup, SecurityGroupList
 from oaktreemodel.security_group_pb2 import SecurityGroupRule
 from oaktreemodel.security_group_pb2 import SecurityGroupRuleList
+from oaktreemodel.network import Network
