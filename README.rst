@@ -15,10 +15,9 @@ With go, the generated files are checked in to the git repo, because that's
 how go dependencies work.
 
 With C++ and python, they are not, as we exepct the unit of consumption to
-be a built library and header files for C++ or a PyPI package for Ruby. It's
-the most likely that as we add structure for more languages that they will
-follow the C++/Python approach and not the go approach - but the decision
-will be made on a per-language basis and reported back here.
+be a built library and header files for C++ or a PyPI package for Python.
+It's most likely that as we add structure for more languages that they will
+follow the C++/Python approach and not the go approach.
 
 Note on API compat
 ------------------
@@ -67,11 +66,10 @@ First you need some dependencies:
 
 .. code-block:: bash
 
-  pip install bindep
+  python3 -m pip install bindep
   apt-get install $(bindep -b)
-  pip install -f requirements.txt
-  pip install grpcio-tools
-  go get -u github.com/golang/protobuf/protoc-gen-go
+  python3 -m pip install --user -r test-requirements.txt
+  bash tools/test-setup.sh
 
 Then you can build the code:
 

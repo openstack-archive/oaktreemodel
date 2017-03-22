@@ -1,0 +1,10 @@
+package: git.openstack.org/openstack/oaktreemodel
+ignore:
+- oaktreemodel
+import:
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto
+  - protoc-gen-go
+- package: google.golang.org/grpc
+  version: ^1.8.0
