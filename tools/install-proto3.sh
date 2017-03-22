@@ -14,29 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ -z $GOPATH ]; then
-    echo "oaktreemodel requires a golang environment."
-    echo "Please set GOPATH and make sure GOPATH/bin is in your PATH."
-    exit 1
-fi
+export GOPATH=${GOPATH:-$HOME}
+[[ ":$PATH:" != *":$GOPATH/bin:"* ]] && export PATH=$GOPATH/bin:$PATH
+
 GRPCDIR=$GOPATH/src/github.com/grpc/grpc
 GRPCVER=$(curl -L http://grpc.io/release)
+
 mkdir -p $(dirname $GRPCDIR)
-git clone -b $GRPCVER https://github.com/grpc/grpc $GRPCDIR
+# TODO(mordred) Can we get this added to zuul required-projects?
+git clone --recursive -b $GRPCVER https://github.com/grpc/grpc $GRPCDIR
 pushd $GRPCDIR
-
-git submodule update --init
 make
+
 if [ $(id -u) = '0' ] ; then
-    SUDO=
+    PREFIX_ARG=
+    CONFIGURE_ARG=
 else
-    SUDO=sudo
+    PREFIX_ARG="prefix=$GOPATH/bin"
+    CONFIGURE_ARG="--prefix=$GOPATH"
 fi
-$SUDO make install
-cd third_party/protobuf
-$SUDO make install
 
-popd
+make install $PREFIX_ARG
+pushd third_party/protobuf
+./configure $CONFIGURE_ARG
+make install
+popd  # third_party/protobuf
 
-go get google.golang.org/grpc
-go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+popd  # $GRPCDIR

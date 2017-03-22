@@ -15,18 +15,19 @@
 
 syntax = "proto3";
 
+option go_package = "git.openstack.org/openstack/oaktreemodel;oaktreemodel";
 option java_multiple_files = true;
-option java_package = "org.openstack.infra.oaktree";
+option java_package = "org.openstack.oaktreemodel";
 option java_outer_classname = "OaktreeProto";
 option objc_class_prefix = "OAK";
 
-import "common.proto";
-import "flavor.proto";
-import "floating_ip.proto";
-import "image.proto";
-import "security_group.proto";
+import "oaktreemodel/common.proto";
+import "oaktreemodel/flavor.proto";
+import "oaktreemodel/floating_ip.proto";
+import "oaktreemodel/image.proto";
+import "oaktreemodel/security_group.proto";
 
-package oaktree;
+package oaktreemodel;
 
 service Oaktree {
   rpc GetFlavor (Filter) returns (Flavor) {}

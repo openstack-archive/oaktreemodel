@@ -14,10 +14,11 @@
 // limitations under the License.
 
 syntax = "proto3";
+option go_package = "git.openstack.org/openstack/oaktreemodel;oaktreemodel";
 
-import "common.proto";
+import "oaktreemodel/common.proto";
 
-package oaktree;
+package oaktreemodel;
 
 message FloatingIP {
   Location location = 1;

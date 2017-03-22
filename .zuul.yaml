@@ -1,0 +1,19 @@
+- job:
+    name: oaktreemodel-distcheck
+    parent: unittests
+    description: |
+      Run make distcheck on oaktreemodel
+    run: playbooks/distcheck.yaml
+
+- project:
+    name: openstack/oaktreemodel
+    # TODO(mordred) Once the base jobs are reworked, we need an oaktreemodel
+    # version of PyPI publication because we need to do code-gen first.
+    templates:
+      - publish-openstack-sphinx-docs
+    check:
+      jobs:
+        - oaktreemodel-distcheck
+    gate:
+      jobs:
+        - oaktreemodel-distcheck
