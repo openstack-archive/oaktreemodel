@@ -15,6 +15,7 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
+PYTHON ?= python3
 SUFFIXES =
 lib_LTLIBRARIES = liboaktreemodel.la
 noinst_LTLIBRARIES =
@@ -29,7 +30,9 @@ EXTRA_DIST= \
 	    config/pandora_vc_revinfo \
 	    ${top_srcdir}/m4/*m4
 
-CLEANFILES=		${BUILT_SOURCES}
+CLEANFILES= \
+	$(top_builddir)/oaktree-go-stamp \
+	${BUILT_SOURCES}
 DISTCLEANFILES=		config/top.h
 
 MAINTAINERCLEANFILES=
@@ -101,27 +104,29 @@ BUILT_SOURCES += \
 	oaktreemodel/security_group.pb.h \
 	oaktreemodel/security_group_pb2.py
 
+GO_BUILT_FILES = \
+	common.pb.go \
+	flavor.pb.go \
+	floating_ip.pb.go \
+	image.pb.go \
+	oaktree.pb.go \
+	security_group.pb.go
 if HAVE_GO_PLUGIN
-BUILT_SOURCES += \
-	oaktreemodel/common.pb.go \
-	oaktreemodel/flavor.pb.go \
-	oaktreemodel/floating_ip.pb.go \
-	oaktreemodel/image.pb.go \
-	oaktreemodel/oaktree.pb.go \
-	oaktreemodel/security_group.pb.go
+BUILT_SOURCES += $(GO_BUILT_FILES)
 endif
 
-EXTRA_DIST += \
+PROTO_FILES = \
 	oaktreemodel/common.proto \
 	oaktreemodel/flavor.proto \
 	oaktreemodel/floating_ip.proto \
 	oaktreemodel/image.proto \
 	oaktreemodel/security_group.proto \
 	oaktreemodel/oaktree.proto
+EXTRA_DIST += $(PROTO_FILES)
 
 SUFFIXES += .proto .grpc.pb.cc .grpc.pb.h .pb.cc .pb.h py .pb.go
-PROTOS_PATH=${top_srcdir}/oaktreemodel
-PROTO_OUTPUT=${top_builddir}/oaktreemodel
+PROTOS_PATH=${top_srcdir}
+PROTO_OUTPUT=${top_builddir}
 .proto.grpc.pb.cc:
 	$(PROTOC) -I $(PROTOS_PATH) \
         	--grpc_out=${PROTO_OUTPUT} \
@@ -132,16 +137,19 @@ PROTO_OUTPUT=${top_builddir}/oaktreemodel
 		--plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN} $<
 .proto.pb.cc:
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=${PROTO_OUTPUT} $<
-	$(PROTOC) -I $(PROTOS_PATH) --go_out=${PROTO_OUTPUT} $<
+
 .proto.pb.h:
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=${PROTO_OUTPUT} $<
 
-.proto.pb.go:
-	$(PROTOC) -I $(PROTOS_PATH) --go_out=${PROTO_OUTPUT} $<
+oaktree-go-stamp: $(GO_BUILT_FILES)
+	go build $(top_srcdir) && touch oaktree-go-stamp
+
+$(GO_BUILT_FILES): $(PROTO_FILES)
+	$(PROTOC) -I $(PROTOS_PATH) --go_out=${GOPATH}/src $(PROTOS_PATH)/oaktreemodel/*.proto
 
 # Have to do this with make matching not automake matching
 # Yay _pb2.py extension!
 %_pb2.py: %.proto
-	python -m grpc.tools.protoc -I $(PROTOS_PATH) \
+	$(PYTHON) -m grpc_tools.protoc -I $(PROTOS_PATH) \
 		--python_out=${PROTO_OUTPUT} \
 		--grpc_python_out=${PROTO_OUTPUT} $<

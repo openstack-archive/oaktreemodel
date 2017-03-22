@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+
+    - name: Run make distcheck
+      shell:
+        cmd: |
+          set -ex
+          export GOPATH=$HOME/go
+          export PATH=$GOPATH/bin:$PATH
+          ./bootstrap.sh
+          ./configure
+          make
+          # Runs go build so we can make sure we did not do anything to make
+          # the go lib unbuildable.
+          make oaktree-go-stamp
+          # There should be no changes to files as a result of running make.
+          # Most likely cause of changes is forgetting to update go files.
+          git diff --stat --exit-code HEAD
+          make distcheck
+        executable: /bin/bash
+        chdir: '{{ zuul_work_dir|default(zuul.project.src_dir) }}'

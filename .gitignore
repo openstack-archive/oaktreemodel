@@ -10,6 +10,7 @@ liboaktreemodel*.tar.gz
 
 # Python protos
 *pb2.py
+*pb2_grpc.py
 
 # autotools
 Makefile
@@ -88,3 +89,6 @@ ChangeLog
 
 # Protobuf Generated Files
 oaktree/rpc/*_pb2.py
+
+# glide vendor dir
+vendor
