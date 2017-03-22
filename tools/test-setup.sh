@@ -14,29 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ -z $GOPATH ]; then
-    echo "oaktreemodel requires a golang environment."
-    echo "Please set GOPATH and make sure GOPATH/bin is in your PATH."
-    exit 1
-fi
-GRPCDIR=$GOPATH/src/github.com/grpc/grpc
-GRPCVER=$(curl -L http://grpc.io/release)
-mkdir -p $(dirname $GRPCDIR)
-git clone -b $GRPCVER https://github.com/grpc/grpc $GRPCDIR
-pushd $GRPCDIR
+BASEDIR=$(dirname $0)
+export GOPATH=${GOPATH:-$HOME}
+mkdir -p $GOPATH/bin
+[[ ":$PATH:" != *":$GOPATH/bin:"* ]] && export PATH=$GOPATH/bin:$PATH
 
-git submodule update --init
-make
-if [ $(id -u) = '0' ] ; then
-    SUDO=
+if ! type glide ; then
+    curl https://glide.sh/get | sh
+fi
+
+if ! protoc --version | grep -q 3\. ; then
+    echo "Protobuf v3 required - installing"
+    $BASEDIR/install-proto3.sh
+fi
+
+if [ -z $VIRTUAL_ENV ]; then
+    python3 -m pip install --user pbr
 else
-    SUDO=sudo
+    python3 -m pip install pbr
 fi
-$SUDO make install
-cd third_party/protobuf
-$SUDO make install
 
-popd
-
-go get google.golang.org/grpc
-go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+glide install

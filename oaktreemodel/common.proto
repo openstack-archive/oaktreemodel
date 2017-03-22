@@ -14,8 +14,9 @@
 // limitations under the License.
 
 syntax = "proto3";
+option go_package = "git.openstack.org/openstack/oaktreemodel;oaktreemodel";
 
-package oaktree;
+package oaktreemodel;
 
 message Project {
   oneof project {
