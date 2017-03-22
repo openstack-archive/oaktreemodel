@@ -1,0 +1,11 @@
+hash: 7028e5e73b29cfad12be34020a7e78fa28c547ee477b7a3dacf2a0471ed1bcce
+updated: 2017-11-27T14:51:12.224751386-06:00
+imports:
+- name: github.com/golang/protobuf
+  version: 1e59b77b52bf8e4b449a57e6f79f21226d571845
+  subpackages:
+  - proto
+  - protoc-gen-go
+- name: google.golang.org/grpc
+  version: 5a9f7b402fe85096d2e1d0383435ee1876e863d0
+testImports: []
