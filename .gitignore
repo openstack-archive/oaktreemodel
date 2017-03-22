@@ -88,3 +88,6 @@ ChangeLog
 
 # Protobuf Generated Files
 oaktree/rpc/*_pb2.py
+
+# glide vendor dir
+vendor
