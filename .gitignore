@@ -37,8 +37,7 @@ m4/lt~obsolete.m4
 .libs
 
 # Packages
-*.egg
-*.egg-info
+*.egg*
 dist
 build
 .eggs
