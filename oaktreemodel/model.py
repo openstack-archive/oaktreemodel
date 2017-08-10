@@ -14,6 +14,8 @@
 # limitations under the License.
 # flake8: noqa
 
+import grpc
+
 from oaktreemodel.common_pb2 import Project, Location, Filter
 from oaktreemodel.flavor_pb2 import Flavor, FlavorList
 from oaktreemodel.floating_ip_pb2 import FloatingIP, FloatingIPList
@@ -21,3 +23,8 @@ from oaktreemodel.image_pb2 import Image, ImageList
 from oaktreemodel.security_group_pb2 import SecurityGroup, SecurityGroupList
 from oaktreemodel.security_group_pb2 import SecurityGroupRule
 from oaktreemodel.security_group_pb2 import SecurityGroupRuleList
+
+
+def make_client(location):
+    channel = grpc.insecure_channel(location)
+    return oaktree_pb2.OaktreeStub(channel)
